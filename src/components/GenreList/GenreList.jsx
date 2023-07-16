@@ -1,32 +1,37 @@
-// import { useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 
 
-// function GenreList() {
+function GenreList() {
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const movies = useSelector(store => store.movies);
+    const handleClick = () => {
+        history.push('/')
+    }
 
-//     const dispatch = useDispatch();
-//     const movies = useSelector(store => store.genres);
+    useEffect(() => {
+        dispatch({ type: 'FETCH_SPECIFIC_MOVIE' });
+    }, []);
 
-//     useEffect(() => {
-//         dispatch({ type: 'FETCH_GENRES' });
-//     }, []);
+    return (
+        <main>
+            <section className="genres">
+                {movies.map(genre => {
+                    return (
+                        <div key={genre.id} >
+                            <h1>{genre.title}</h1>
+                            <img src={genre.poster} alt={genre.title}/>
+                            <h2>{genre.description}</h2>
+                        </div>
+                    );
+                })}
+            </section>
+            <button onClick={handleClick}> Return to Home</button>
+        </main>
 
-//     return (
-//         <main>
-//             <h1>MovieList</h1>
-//             <section className="genres">
-//                 {genres.map(genre => {
-//                     return (
-//                         <div key={genre.id} >
-//                             <h3>{genre.title}</h3>
-//                             <img src={genre.poster} alt={genre.title}/>
-//                         </div>
-//                     );
-//                 })}
-//             </section>
-//         </main>
+    );
+}
 
-//     );
-// }
-
-// export default GenreList;
+export default GenreList;

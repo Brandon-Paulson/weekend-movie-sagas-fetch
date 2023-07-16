@@ -16,6 +16,11 @@ router.get('/', (req, res) => {
 
 });
 
+router.get(`/details/${genres.id}`, (req, res) => {
+  let genresId = getMovieById(req.params.genresId);
+  res.status(200).send(genresId);
+});
+
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie

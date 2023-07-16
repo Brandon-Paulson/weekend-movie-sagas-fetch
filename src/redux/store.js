@@ -52,8 +52,9 @@ function* fetchAllMovies() {
 
 function* fetchSpecificMovie() {
     try{
-        const response = yield fetch(`/api/movie/${movie.id}`);
+        const response = yield fetch(`/details/${genres.id}`);
         const movie = yield response.json();
+        console.log('this is the specific movie:', movie);
         yield put ({type: 'SET_MOVIES', payload: movie})
     } catch {
         console.log('get specific movie error');
@@ -61,7 +62,8 @@ function* fetchSpecificMovie() {
 }
 
 function* watcherSaga() {
-    yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('FETCH_MOVIES', fetchAllMovies),
+    yield takeEvery('FETCH_SPECIFIC_MOVIE', fetchSpecificMovie);
 }
 
 sagaMiddleware.run(watcherSaga);
