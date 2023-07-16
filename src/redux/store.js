@@ -50,9 +50,10 @@ function* fetchAllMovies() {
     }
 }
 
+
 function* fetchSpecificMovie() {
     try{
-        const response = yield fetch(`/details/${genres.id}`);
+        const response = yield fetch(`/details/${genreId}`);
         const movie = yield response.json();
         console.log('this is the specific movie:', movie);
         yield put ({type: 'SET_MOVIES', payload: movie})

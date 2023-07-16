@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom';
+import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom';
+import { useState } from 'react';
 
 
 function GenreList() {
@@ -10,7 +11,18 @@ function GenreList() {
     const handleClick = () => {
         history.push('/')
     }
+const [movieId, setMovieId] = useState('')
 
+const {genreId} = useParams();
+console.log(genreId)
+
+
+if (movieId === genreId) {
+    return 
+}
+
+
+//pass movie function using url
     useEffect(() => {
         dispatch({ type: 'FETCH_SPECIFIC_MOVIE' });
     }, []);
