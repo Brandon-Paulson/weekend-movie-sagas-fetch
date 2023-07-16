@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import './MovieList.css'
-import {CardActions, CardContent, Button, Typography, CardMedia} from '@mui/material';
+import {CardContent, Typography, CardMedia, Grid} from '@mui/material';
 
 function MovieList() {
 
@@ -21,6 +21,7 @@ function MovieList() {
                     return (
                     <div key={movie.id} >
                         <Link to={`/details/${movie.id}`}>
+                        <Grid container rowSpacing={1} columnSpacing={{ xs: 10, sm: 5, md: 3 }}>
                         <CardContent>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                           {movie.title}
@@ -34,6 +35,7 @@ function MovieList() {
                       </CardContent>
                       {/* <CardActions>
                       </CardActions> */}
+                      </Grid>
                       </Link>
                         </div>
                     );

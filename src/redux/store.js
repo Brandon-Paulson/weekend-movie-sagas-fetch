@@ -50,6 +50,16 @@ function* fetchAllMovies() {
     }
 }
 
+function* fetchSpecificMovie() {
+    try{
+        const response = yield fetch(`/api/movie/${movie.id}`);
+        const movie = yield response.json();
+        yield put ({type: 'SET_MOVIES', payload: movie})
+    } catch {
+        console.log('get specific movie error');
+ }
+}
+
 function* watcherSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
 }
