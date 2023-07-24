@@ -11,31 +11,27 @@ function GenreList() {
     const handleClick = () => {
         history.push('/')
     }
-const [movieId, setMovieId] = useState('')
-
-const {genreId} = useParams();
-console.log(genreId)
+// const [movieId, setMovieId] = useState('')
 
 
-if (movieId === genreId) {
-    return 
-}
+const {genresId} = useParams();
+// console.log('WHAT IS USE PARAMS ', genresId)
+// console.log('WHAT IS MOVIES', movies);
 
 
-//pass movie function using url
-    useEffect(() => {
-        dispatch({ type: 'FETCH_SPECIFIC_MOVIE' });
-    }, []);
-
+for (const movie of movies) {
+    // console.log('FOR OF LOOP', movie);
+    // console.log(genresId);
+     if (movie.id === genresId) {
     return (
         <main>
             <section className="genres">
-                {movies.map(genre => {
+                {movie.map(specificMovie => {
                     return (
-                        <div key={genre.id} >
-                            <h1>{genre.title}</h1>
-                            <img src={genre.poster} alt={genre.title}/>
-                            <h2>{genre.description}</h2>
+                        <div key={specificMovie.id} >
+                            <h1>{specificMovie.title}</h1>
+                            <img src={specificMovie.poster} alt={specificMovie.title}/>
+                            <h2>{specificMovie.description}</h2>
                         </div>
                     );
                 })}
@@ -44,6 +40,31 @@ if (movieId === genreId) {
         </main>
 
     );
+}
+}
+
+//pass movie function using url
+    // useEffect(() => {
+    //     dispatch({ type: 'FETCH_SPECIFIC_MOVIE' });
+    // }, []);
+
+    // return (
+    //     <main>
+    //         <section className="genres">
+    //             {movies.map(movie => {
+    //                 return (
+    //                     <div key={movie.id} >
+    //                         <h1>{movie.title}</h1>
+    //                         <img src={movie.poster} alt={movie.title}/>
+    //                         <h2>{movie.description}</h2>
+    //                     </div>
+    //                 );
+    //             })}
+    //         </section>
+    //         <button onClick={handleClick}> Return to Home</button>
+    //     </main>
+
+    // );
 }
 
 export default GenreList;

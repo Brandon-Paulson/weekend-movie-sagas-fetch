@@ -4,6 +4,7 @@ import logger from 'redux-logger'
 import { Provider } from 'react-redux';
 import { takeEvery, put } from "redux-saga/effects";
 import createSagaMiddleware from "redux-saga";
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
@@ -53,7 +54,7 @@ function* fetchAllMovies() {
 
 function* fetchSpecificMovie() {
     try{
-        const response = yield fetch(`/details/${genreId}`);
+        const response = yield fetch(`/details/${genresId}`);
         const movie = yield response.json();
         console.log('this is the specific movie:', movie);
         yield put ({type: 'SET_MOVIES', payload: movie})

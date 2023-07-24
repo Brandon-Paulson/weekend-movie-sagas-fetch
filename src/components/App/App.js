@@ -11,7 +11,6 @@ function App() {
         <Route path="/" exact>
           <MovieList />
         </Route>
-
         <Route path={`/Details/:genresId`}>
           <GenreList />
         </Route>
