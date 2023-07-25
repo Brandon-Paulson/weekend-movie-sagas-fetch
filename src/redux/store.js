@@ -4,7 +4,8 @@ import logger from 'redux-logger'
 import { Provider } from 'react-redux';
 import { takeEvery, put } from "redux-saga/effects";
 import createSagaMiddleware from "redux-saga";
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useParams } from 'react-router-dom'; 
+
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
@@ -50,25 +51,43 @@ function* fetchAllMovies() {
         alert('Something went wrong.')
     }
 }
-
-
-function* fetchSpecificMovie() {
-    try{
-        const response = yield fetch(`/details/${genresId}`);
-        const movie = yield response.json();
-        console.log('this is the specific movie:', movie);
-        yield put ({type: 'SET_MOVIES', payload: movie})
+function* fetchAllGenres() {
+    // get all genres from the DB
+    try {
+        const response = yield fetch('/api/genre');
+        if (!response.ok) {
+            throw new Error("Network response was not OK");
+        }
+        const genres = yield response.json();
+        yield put({ type: 'SET_GENRES', payload: genres });
     } catch {
-        console.log('get specific movie error');
- }
+        console.log('get all error');
+        alert('Something went wrong.')
+    }
 }
 
-function* watcherSaga() {
+
+// function* fetchSpecificMovie() {
+//     try {
+//         let movieId = 4;
+//         const response = yield fetch(`api/movie/details/${movieId}`);
+//         const movie = yield response.json();
+//         console.log('this is the specific movie:', movie);
+//         yield put({ type: 'SET_MOVIES', payload: movie });
+
+//         // const genreResponse = yield fetch(`api/movie/details/${movieId}`);
+
+
+//     } catch (error)
+//      {   console.error("Something bad happened");   console.error(error); }
+// }
+
+function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies),
-    yield takeEvery('FETCH_SPECIFIC_MOVIE', fetchSpecificMovie);
+    yield takeEvery('FETCH_GENRES', fetchAllGenres);
 }
 
-sagaMiddleware.run(watcherSaga);
+sagaMiddleware.run(rootSaga);
 
 export function StoreProvider({ children }) {
     return (

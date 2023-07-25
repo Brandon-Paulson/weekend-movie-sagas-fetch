@@ -1,18 +1,18 @@
-import {HashRouter as Router, Route} from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import MovieList from '../MovieList/MovieList'
-import GenreList from '../GenreList/GenreList';
+import DetailsList from '../DetailsList/DetailsList';
 
 function App() {
   return (
     <div className="App">
       <h1>The Movies Saga!</h1>
-      <Router>        
+      <Router>
         <Route path="/" exact>
           <MovieList />
         </Route>
-        <Route path={`/Details/:genresId`}>
-          <GenreList />
+        <Route path={`/details/:movieId`}> 
+          <DetailsList/>
         </Route>
       </Router>
     </div>
