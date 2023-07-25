@@ -28,7 +28,7 @@ function DetailsList() {
     const genreLoop = [];
 
      for( const i of genreItem) {
-         genreLoop.push(i.name);
+         genreLoop.push(i.name, ' ');
     }
 
     console.log(genreLoop);
